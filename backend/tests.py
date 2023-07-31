@@ -1,11 +1,11 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from .models import UserProfile, Hospital, Device, VitalType, VitalData, DevicePermission
+from .models import CustomUser, Hospital, Device, VitalType, VitalData, Patient, Ward
 from django.utils import timezone
 class UserProfileModelTest(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(username='salman', password='admin')
-        self.user_profile = UserProfile.objects.create(user=self.user, user_role='doctor')
+        self.user_profile = CustomUser.objects.create(user=self.user, user_role='doctor')
     
     def test_user_profile_creation(self):
         self.assertEqual(self.user_profile.user, self.user)
