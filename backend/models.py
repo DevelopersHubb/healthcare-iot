@@ -31,7 +31,7 @@ class Ward(models.Model):
 
 class Device(models.Model):
     name = models.CharField(max_length=512, null=True)
-    owner_user = models.ForeignKey(User_Role, null=True, blank=True, on_delete=models.CASCADE)
+    owner_user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     owner_hospital = models.ForeignKey(Hospital, null=True, blank=True, on_delete=models.CASCADE)
     owner_ward = models.ForeignKey(Ward, null=True, blank=True, on_delete=models.CASCADE)
     
@@ -40,7 +40,7 @@ class Device(models.Model):
 
 class Patient(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    assigned_doctors = models.ManyToManyField(User, blank=True, related_name='patients_assigned')
+    assigned_doctor = models.ForeignKey(User, blank=True, null=True, related_name='patients_assigned', on_delete=models.CASCADE)
     assigned_device = models.ForeignKey(Device, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
